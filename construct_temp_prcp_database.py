@@ -2,23 +2,32 @@ import pandas as pd
 import requests
 
 def request_weather_arxiv(datatype,year):
-    dataset='GHCND'
-    location="GHCND:FR000007150" #Paris Montsouris
+  '''
+  Args:
+    datatype: for example min temperature or avg temperature etc
+    year
+  Output:
+    Daily data for min and max temperatures and precipitations 
+  '''
+
+  dataset='GHCND'
+  # location code for Paris Montsouris station
+  location="GHCND:FR000007150"
     
-    n_token='VMPMXiToPnVyavbJBWucazFqvkfkQnAD'
+  n_token='VMPMXiToPnVyavbJBWucazFqvkfkQnAD'
 
-    s_date = str(year) + '-01-01'
-    e_date = str(year) + '-12-31'
+  s_date = str(year) + '-01-01'
+  e_date = str(year) + '-12-31'
 
-    weathers_url="https://www.ncdc.noaa.gov/cdo-web/api/v2/data/"
-    params='stationid=' + location + '&' 'datasetid=' + dataset + '&' + 'startdate=' + s_date + '&' + 'enddate=' + e_date + '&' + 'limit=1000' + '&' + 'units=metric' + '&datatypeid=' + datatype
-    noaa_token = {'token': n_token}
+  weathers_url="https://www.ncdc.noaa.gov/cdo-web/api/v2/data/"
+  params='stationid=' + location + '&' 'datasetid=' + dataset + '&' + 'startdate=' + s_date + '&' + 'enddate=' + e_date + '&' + 'limit=1000' + '&' + 'units=metric' + '&datatypeid=' + datatype
+  noaa_token = {'token': n_token}
 
-    req = requests.get(weathers_url, params=params, headers=noaa_token)
-    #print(req.json())
-    df_req = pd.DataFrame(req.json()['results'])
+  req = requests.get(weathers_url, params=params, headers=noaa_token)
+  #print(req.json())
+  df_req = pd.DataFrame(req.json()['results'])
       
-    return pd.DataFrame(df_req,columns=['date','value'])
+  return pd.DataFrame(df_req,columns=['date','value'])
 
 for year in range(2004,2021):
     df_PRCP = request_weather_arxiv('PRCP',year)
