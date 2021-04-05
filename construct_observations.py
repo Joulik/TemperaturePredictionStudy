@@ -33,12 +33,17 @@ def request_url(url):
 
     return yesterday_csv,t_min,t_max
 
+print('=======================================')
+print(' Collecting observations')
+print(' Station: Paris Saint-Germain-des-Prés')
+print('=======================================')
+
 yesterday_date, temp_min, temp_max = request_url('https://static.meteo-paris.com/station/downld02.txt')
 
-data=[yesterday_date,temp_min,temp_max]
+data = [yesterday_date,temp_min,temp_max]
 
 # Append daily observations to observation file
-pd.DataFrame.from_records([data]).to_csv('ParisMontsouris_observed_temp.csv',index=False,mode='a',header=False)
+pd.DataFrame.from_records([data]).to_csv('ParisSaintGermainDesPres_observed_temp.csv',index=False,mode='a',header=False)
 
 # Append daily observations to backup observation file
-pd.DataFrame.from_records([data]).to_csv('backup_ParisMontsouris_observed_temp.csv',index=False,mode='a',header=False)
+pd.DataFrame.from_records([data]).to_csv('backup_ParisSaintGermainDesPres_observed_temp.csv',index=False,mode='a',header=False)

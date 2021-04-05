@@ -26,10 +26,10 @@ The script construct_temp_prcp_database.py extracts daily minimal and maximal te
 
 python construct_observations.py
 
-Observations for min and max temperatures are taken from https://static.meteo-paris.com/station/downld02.txt The script should be run everyday.
+Observations for min and max temperatures starting from April, 1st 2021 are taken from NOAA database. The script should regularly be run. Unfortunately, data are sometimes missing
 
 ## Construction of predictions file
 
 python construct_predictions.py
 
-Predictions for min and max temperatures are taken from https://www.meteo-paris.com/ile-de-france/previsions The script should be run everyday.
+Predictions for min and max temperatures of Paris area are taken from https://www.meteo-paris.com/ile-de-france/previsions The script should be run everyday.

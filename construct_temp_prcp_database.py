@@ -13,6 +13,11 @@ def request_weather_arxiv(datatype,year):
   dataset='GHCND'
   # location code for Paris Montsouris station
   location="GHCND:FR000007150"
+
+  if datatype=='PRCP':
+    print('=============================')
+    print(' Station: {}'.format(location))
+    print('=============================')
     
   n_token='VMPMXiToPnVyavbJBWucazFqvkfkQnAD'
 
@@ -38,6 +43,6 @@ for year in range(2004,2021):
     
     pd.merge(df_aux,df_PRCP,how='outer',on='date',suffixes=('','_PRCP'))\
       .sort_values(by='date')\
-      .to_csv('ParisMontSouris_weather_arxiv.csv',index=False,mode='a',header=False)
+      .to_csv('Station_weather_arxiv.csv',index=False,mode='a',header=False)
     
     print('Year {}: DONE'.format(year),end='\r')

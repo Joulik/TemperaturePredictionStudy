@@ -37,10 +37,15 @@ def request_url(url):
     #print(pred_temp)
     return pred_temp
 
+print('============================================')
+print(' Collecting predictions for Paris area from')
+print(' https://www.meteo-paris.com/')
+print('============================================')
+
 predicted_temps = request_url('https://www.meteo-paris.com/ile-de-france/previsions')
 
 # Append daily predictions to prediction file
-pd.DataFrame.from_records([predicted_temps]).to_csv('ParisMontsouris_temp_predictions.csv',index=False,mode='a',header=False)
+pd.DataFrame.from_records([predicted_temps]).to_csv('ParisArea_temp_predictions.csv',index=False,mode='a',header=False)
 
 # Append daily predictions to prediction backup file
-pd.DataFrame.from_records([predicted_temps]).to_csv('backup_ParisMontsouris_temp_predictions.csv',index=False,mode='a',header=False)
+pd.DataFrame.from_records([predicted_temps]).to_csv('backup_ParisArea_temp_predictions.csv',index=False,mode='a',header=False)
