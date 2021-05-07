@@ -1,6 +1,6 @@
 # Temperature Prediction Study
 
-When trying to predict what the minimal and maximum temperatures of a given day will be, do weather forecast specialists perform better than a model which randomly samples temperatures from 30 years of historical data for the same date?
+From basic models based on random sampling to evolved ones, how do these models perform compare with weather forecast specialists when trying to predict temperatures?  
 
 ## Requirements
 
@@ -12,7 +12,11 @@ When trying to predict what the minimal and maximum temperatures of a given day 
 
 - pandas
 
+- numpy
+
 - requests
+
+# Data collection
 
 ## Construction of historical database
 
@@ -33,3 +37,17 @@ Observations for min and max temperatures starting from April, 1st 2021 are take
 python construct_predictions.py
 
 Predictions for min and max temperatures of Paris area are taken from https://www.meteo-paris.com/ile-de-france/previsions The script should be run everyday.
+
+# Models
+
+## Model 1
+
+Predict temperatures on a given day of year by sampling these temperatures on the same day of a year chosen randomly in the preceding 40 years.
+
+Example: min and max temperatures on April, 1st 1987 predicted from min and max temperatures on April, 1st on a year randomly sampled between 1947 and 1986.
+
+## Model 2
+
+Calculate temperatures on a given day as the mean temperatures of this day over the previous 10, 20, 30... years.
+
+Example: min temperature on April, 1st 1987 calculated as the min temperature mean between 1947 and 1986.  
