@@ -52,9 +52,9 @@ The solid lines are normal distribution functions with mean and standard deviati
 
 ![figModel1](fig_model_1.png)
 
-A possible interpretation of the plots is the following. If we try to predict the minimum temperature of a given day by sampling randomly the minimum temperature of this day over the previous 40 years, and if we perform this kind of prediction a large number of times, i.e. during decades, the distance between the prediction and the actual temperature will be less than 1 degree on average.
+A possible interpretation of the plots is the following. If one attempts to predict the minimum temperature of a given day by randomly sampling the minimum temperature of this day over the previous 40 years, and if we perform this kind of prediction a large number of times, i.e. during decades, the distance between the prediction and the actual temperature will be less than 1 degree on average (low bias).
 
-However, on average two out of three predictions will be within 5 degree of the observed temperature. This is not very useful if we want to predict whether it is going to freeze. The plot also shows that it is not rare to be wrong by 10 degree with model 1.
+However, on average two out of three predictions will be within 5 degree of the observed temperature (high variance). This is not very useful if we want to predict whether it is going to freeze. The plot also shows that it is not rare to be wrong by 10 degrees with model 1.
 
 
 ## Model 2
@@ -69,4 +69,4 @@ The solid lines are normal distribution functions with mean and standard deviati
 
 ![figModel2](fig_model_2.png)
 
-Model 2 does a slightly better job than model 1 because it yields smaller standard deviation values. This observation means that the predicitions arising from model 2 on average fall at a shorter distance from the observed value. 
+Model 2 does a slightly better job than model 1 because it yields lower variance. This observation means that the predicitions arising from model 2 on average fall closer to the observed value.
