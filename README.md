@@ -46,10 +46,27 @@ Predict temperatures on a given day of year by sampling these temperatures on th
 
 Example: min and max temperatures on April, 1st 1987 predicted from min and max temperatures on April, 1st on a year randomly sampled between 1947 and 1986.
 
+The distribution below (bar plots) was obtained for daily predictions of min and max temperatures between 1940 and 2000 excluding leap years.
+
+The solid lines are normal distribution functions with mean and standard deviation values obtained from the data in the bar plots. 
+
 ![figModel1](fig_model_1.png)
+
+A possible interpretation of the plots is the following. If we try to predict the minimum temperature of a given day by sampling randomly the minimum temperature of this day over the previous 40 years, and if we perform this kind of prediction a large number of times, i.e. during decades, the distance between the prediction and the actual temperature will be less than 1 degree on average.
+
+However, on average two out of three predictions will be within 5 degree of the observed temperature. This is not very useful if we want to predict whether it is going to freeze. The plot also shows that it is not rare to be wrong by 10 degree with model 1.
+
 
 ## Model 2
 
-Calculate temperatures on a given day as the mean temperatures of this day over the previous 10, 20, 30... years.
+Calculate temperatures on a given day as the mean temperatures of this day over the previous 40 years.
 
-Example: min temperature on April, 1st 1987 calculated as the min temperature mean between 1947 and 1986.  
+Example: min temperature on April, 1st 1987 calculated as the min temperature mean on April, 1st between 1947 and 1986.
+
+The distribution below (bar plots) was obtained for daily predictions of min and max temperatures between 1940 and 2000 excluding leap years.
+
+The solid lines are normal distribution functions with mean and standard deviation values obtained from the data in the bar plots. 
+
+![figModel2](fig_model_2.png)
+
+Model 2 does a slightly better job than model 1 because it yields smaller standard deviation values. This observation means that the predicitions arising from model 2 on average fall at a shorter distance from the observed value. 
