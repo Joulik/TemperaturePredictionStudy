@@ -46,6 +46,8 @@ Predict temperatures on a given day of year by sampling these temperatures on th
 
 Example: min and max temperatures on April, 1st 1987 predicted from min and max temperatures on April, 1st on a year randomly sampled between 1947 and 1986.
 
+![figModel1](fig_model_1.png)
+
 ## Model 2
 
 Calculate temperatures on a given day as the mean temperatures of this day over the previous 10, 20, 30... years.
