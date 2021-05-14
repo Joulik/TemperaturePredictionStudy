@@ -70,3 +70,15 @@ The solid lines are normal distribution functions with mean and standard deviati
 ![figModel2](fig_model_2.png)
 
 Model 2 does a slightly better job than model 1 because it yields lower variance. This observation means that the predicitions arising from model 2 on average fall closer to the observed value.
+
+## Model 5
+
+According to this model the following day temperatures is taken as the current day's temperatures.
+
+Example: min temperature for April, 2nd 1987 is taken as min temperature on April, 1st 1987.
+
+The solid lines are normal distribution functions with mean and standard deviation values obtained from the data in the bar plots. 
+
+![figModel5](fig_model_5.png)
+
+This model is perhaps the simplest one can think of to predict the following day's temperatures. Nevertheless, it performs better than model 1 and model 2. On average, the predicted value falls within less than 0.1°C from the actual temperature.
