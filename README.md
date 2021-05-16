@@ -75,7 +75,7 @@ Model 2 does a slightly better job than model 1 because it yields lower variance
 
 Multiple linear regression model
 
-![fig_MultivarLinReg](multivariable_linear_regression.png)
+![fig_MultivarLinReg](multiple_linear_regression.png)
 
 ## Model 5
 
