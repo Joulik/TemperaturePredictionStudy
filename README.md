@@ -75,7 +75,7 @@ Model 2 does a slightly better job than model 1 because it yields lower variance
 
 Multiple linear regression model
 
-<img src="https://render.githubusercontent.com/render/math?math=y = \theta_1 x_1 + \theta_2 x_2 + \theta_3 x_3 + \theta_4 x_4">
+![fig_MultivarLinReg](multivariable_linear_regression.png)
 
 ## Model 5
 
