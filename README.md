@@ -71,6 +71,12 @@ The solid lines are normal distribution functions with mean and standard deviati
 
 Model 2 does a slightly better job than model 1 because it yields lower variance. This observation means that the predicitions arising from model 2 on average fall closer to the observed value.
 
+## Model 3
+
+Multiple linear regression model
+
+<img src="https://render.githubusercontent.com/render/math?math=y = \theta_1 x_1 + \theta_2 x_2 + \theta_3 x_3 + \theta_4 x_4">
+
 ## Model 5
 
 According to this model the following day temperatures is taken as the current day's temperatures.
