@@ -52,7 +52,7 @@ def split_rescale(X,y):
 
     return X_train_resc,X_test_resc,y_train,y_test
 
-def lin_reg(X_train_res,X_test_resc,y_train,y_test):
+def lin_reg(X_train_resc,X_test_resc,y_train,y_test):
     '''
     Linear regression
     Args:
@@ -96,85 +96,93 @@ def dec_tree_reg(X_train_resc,X_test_resc,y_train,y_test):
     return score,feat_imp,dist
 
 
-# read csv
-arxiv_csv = 'FR000007150_daily_weather_arxiv.csv'
-cols=['date','T_min','T_max','Prcp']
-df_PAR = pd.read_csv(arxiv_csv,delimiter=',',names=cols,parse_dates=['date'])
+def run_model_3():
+    # read csv
+    arxiv_csv = 'FR000007150_daily_weather_arxiv.csv'
+    cols=['date','T_min','T_max','Prcp']
+    df_PAR = pd.read_csv(arxiv_csv,delimiter=',',names=cols,parse_dates=['date'])
 
-temperature_type = ['T_min','T_max']
+    temperature_type = ['T_min','T_max']
 
-for temp in temperature_type:
+    for temp in temperature_type:
 
-    # create features dataframe
-    df_features = pd.DataFrame()
+        # create features dataframe
+        df_features = pd.DataFrame()
 
-    df_features[temp]=df_PAR[temp]
+        df_features[temp]=df_PAR[temp]
 
-    df_features['delta_date_1']=df_PAR[temp].diff(1)
-    df_features['delta_date_2']=df_PAR[temp].diff(2)
+        df_features['delta_date_1']=df_PAR[temp].diff(1)
+        df_features['delta_date_2']=df_PAR[temp].diff(2)
 
-    # month cosine and sine as features
-    cos_month = df_PAR['date'].dt.month.apply(cos_m)
-    sin_month = df_PAR['date'].dt.month.apply(sin_m)
+        # month cosine and sine as features
+        cos_month = df_PAR['date'].dt.month.apply(cos_m)
+        sin_month = df_PAR['date'].dt.month.apply(sin_m)
 
-    df_features['cos_month']=cos_month
-    df_features['sin_month']=sin_month
+        df_features['cos_month']=cos_month
+        df_features['sin_month']=sin_month
 
-    df_features=df_features.dropna()
-    df_features=df_features[:-1]
+        df_features=df_features.dropna()
+        df_features=df_features[:-1]
 
-    print("Size of features DF: {}".format(df_features.size))
+        print("Size of features DF: {}".format(df_features.size))
 
-    # create targets dataframe
-    df_targets = df_PAR[temp][3:]
-    #print(df_targets.size)
+        # create targets dataframe
+        df_targets = df_PAR[temp][3:]
+        #print(df_targets.size)
 
-    # turn df into numpy arrays
-    X = df_features.to_numpy()
-    y = df_targets.to_numpy()
+        # turn df into numpy arrays
+        X = df_features.to_numpy()
+        y = df_targets.to_numpy()
 
-    # split data and rescale features
-    X_train_resc,X_test_resc,y_train,y_test = split_rescale(X,y)
+        # split data and rescale features
+        X_train_resc,X_test_resc,y_train,y_test = split_rescale(X,y)
 
-    # linear regression
-    score,coeffs,dist_lr = lin_reg(X_train_resc,X_test_resc,y_train,y_test)
+        # linear regression
+        score,coeffs,dist_lr = lin_reg(X_train_resc,X_test_resc,y_train,y_test)
+        
+        print("-----LINEAR REGRESSION-----")
+        print("Analyzing {}".format(temp))
 
-    print("-----LINEAR REGRESSION-----")
-    print("Analyzing {}".format(temp))
+        print("Score: {}".format(score))
+        print(df_features.columns)
+        print("Coefficients: {}".format(coeffs))
 
-    print("Score: {}".format(score))
-    print(df_features.columns)
-    print("Coefficients: {}".format(coeffs))
+        print("")
+        print("Mean: {}".format(dist_lr.mean()))
+        print("Stddv: {}".format(dist_lr.std()))
+        print("")
 
-    print("")
-    print("Mean: {}".format(dist_lr.mean()))
-    print("Stddv: {}".format(dist_lr.std()))
-    print("")
+        # decision tree regressor
+        score,feat_imp,dist_dtr = dec_tree_reg(X_train_resc,X_test_resc,y_train,y_test)
 
-    # decision tree regressor
-    score,feat_imp,dist_dtr = dec_tree_reg(X_train_resc,X_test_resc,y_train,y_test)
+        print("-----DECISION TREE REGRESSOR-----")
 
-    print("-----DECISION TREE REGRESSOR-----")
+        print("Score: {}".format(score))
+        print(df_features.columns)
+        #print("Coefficients: {}".format(coeffs))
+        print("Features importance: {}".format(feat_imp))
 
-    print("Score: {}".format(score))
-    print(df_features.columns)
-    #print("Coefficients: {}".format(coeffs))
-    print("Features importance: {}".format(feat_imp))
+        print("")
+        print("Mean: {}".format(dist_dtr.mean()))
+        print("Stddv: {}".format(dist_dtr.std()))
+        print("")
 
-    print("")
-    print("Mean: {}".format(dist_dtr.mean()))
-    print("Stddv: {}".format(dist_dtr.std()))
-    print("")
+        if temp=='T_min':
+            arr_T_min_lr  = dist_lr
+            arr_T_min_dtr = dist_dtr
+        else:
+            arr_T_max_lr = dist_lr
+            arr_T_max_dtr = dist_dtr
 
-    if temp=='T_min':
-        arr_T_min_lr  = dist_lr
-        arr_T_min_dtr = dist_dtr
-    else:
-        arr_T_max_lr = dist_lr
-        arr_T_max_dtr = dist_dtr
+    return arr_T_min_lr, arr_T_max_lr, arr_T_min_dtr,arr_T_max_dtr
 
-viz(arr_T_min_lr, arr_T_max_lr)
-viz(arr_T_min_dtr,arr_T_max_dtr)
+if __name__=='__main__':
+    arr_T_min_lr, arr_T_max_lr, arr_T_min_dtr,arr_T_max_dtr = run_model_3()
+
+    print(arr_T_min_lr.shape)
+
+    viz(arr_T_min_lr, arr_T_max_lr)
+    viz(arr_T_min_dtr,arr_T_max_dtr)
 
 #plt.hist(dist,bins=41)
 #plt.xlim((-20,20))

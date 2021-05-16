@@ -74,7 +74,7 @@ def run_model_2():
 
     #construct list of years for historical analysis excluding leap years
     year_list=[]
-    for y in range(1940,1970):
+    for y in range(1940,2001):
         if y%4 != 0:
             year_list.append(y)
         

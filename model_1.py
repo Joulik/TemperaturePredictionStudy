@@ -61,7 +61,7 @@ def run_model_1():
 
     # generate list of years to sample, avoid leap years
     year_list=[]
-    for y in range(1940,2000):
+    for y in range(1940,2001):
         if y%4 != 0:
             year_list.append(y)
 
