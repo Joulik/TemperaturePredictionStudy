@@ -73,13 +73,33 @@ Model 2 does a slightly better job than model 1 because it yields lower variance
 
 ## Model 3
 
-Multiple linear regression model
+Model 3 is a multiple linear regression model as defined below:
 
 ![fig_MultivarLinReg](multiple_linear_regression.png)
 
+The following four features are used to predict temperature (min and max) on a given day: temperature on the previous day (day-1), difference between temperature on day-1 and temperature on day-2, difference between temperature on day-2 and day-3, cosine and sine of the day's month.
+
+Results obtained by means of a linear regression for model 3 are shown in the plot below. Note that a decision tree regressor model performs similarly.
+
+![figModel3_LinReg](fig_model_3_LinReg.png)
+
+Analysis of the features weights shows that temperature on day-1 plays a major role (see Model 5 below). In fact, this weight is more than one order of magnitude larger than the other features' weights.
+
+## Model 4
+
+Model 4 is like model 3 a multiple linear regression model.
+
+Model 4 has three features, namely the day of year number (e.g. 32 for Feb. 2nd), temperature on day-1 and temperature on day-2.
+
+The figure below shows how model 4 performs.
+
+![figModel4_LinReg](fig_model_4_LinReg.png)
+
+Given the results obtained with model 3, temperature on day-1 quite unsurprisingly has a weight more than one order of magnitude larger than the weight of the other features. Note that the linear regression approach yields values for mean and standard deviation equal to the decision tree regressor.
+
 ## Model 5
 
-According to this model the following day temperatures is taken as the current day's temperatures.
+According to model 5 the following day temperatures is taken as the current day's temperatures.
 
 Example: min temperature for April, 2nd 1987 is taken as min temperature on April, 1st 1987.
 
